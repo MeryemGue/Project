@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+
+  web-api:
+    build:
+      context: ./web-api
+    container_name: web-api
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./shared:/shared
+    environment:
+      - FOLDER_SHARED=/shared
+      - OPENAI_API_KEY=your_openai_key_here
+    depends_on:
+      - ocr-worker
+
+  ocr-worker:
+    build:
+      context: ./ocr-worker
+    container_name: ocr-worker
+    volumes:
+      - ./shared:/shared
+    environment:
+      - FOLDER_SHARED=/shared
