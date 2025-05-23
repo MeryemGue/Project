@@ -4,9 +4,14 @@ import fitz
 from flask import Flask, render_template, request, send_from_directory, flash, url_for, session, redirect
 from werkzeug.utils import secure_filename
 from dotenv import load_dotenv
-from shared.utils import anonymiser_fichier
-load_dotenv()
 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
+
+from shared.utils import anonymiser_fichier
+
+load_dotenv()
 app = Flask(__name__)
 app.secret_key = 'xpert-ia-secret'
 
